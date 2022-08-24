@@ -21,6 +21,5 @@ int main()
 		cout<<"root="<<setprecision(5)<<x1<<"\t";
 		cout<<"functoin="<<setprecision(5)<<f1<<endl;
 	}while(fabs(f1)>e);
-	return 0;
-		
+	return 0;		
 }

@@ -6,8 +6,7 @@
 
 /* Defining equation to be solved.
    Change this equation to solve another problem. */
-#define    f(x)    x*x*x - 2*x - 5
-
+#define    f(x)   pow(x,3)+pow(x,2)+x+7
 int main()
 {
 	 float x0, x1, x2, f0, f1, f2, e;
