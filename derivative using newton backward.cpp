@@ -56,22 +56,16 @@ int main()
   }
  }
 
- /* Calculate finite difference */
  h = x[1] - x[0];
 
- /* Applying formula for calculating sum of
- different terms in formula to find derivatives
- using backward difference formula */
- for(i=1; i<=index; i++)
+
  {
      term = pow(y[index][i], i)/i;
      sum = sum + term;
  }
 
- /* Dividing by h */
  first_derivative = sum/h;
 
- /* Displaying final result */
  printf("First derivative at x = %0.2f is %0.2f", xp, first_derivative);
 
  return 0;
