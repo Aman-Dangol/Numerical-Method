@@ -1,72 +1,48 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-
+int fact(int);
 int main()
 {
- float x[20], y[20][20], xp, h, sum=0.0, first_derivative, term;
- int i,j, n, index, flag = 0;
-
- /* Reading number of data */
- printf("Enter number of data: ");
- scanf("%d", &n);
-
- /* Reading actual data of x and y */
- printf("Enter data:\n");
- for(i = 0; i < n ; i++)
- {
-  printf("x[%d] = ", i);
-  scanf("%f", &x[i]);
-  printf("y[%d] = ", i);
-  scanf("%f", &y[i][0]);
- }
-
- /* Reading calculation point */
- printf("Enter at what value of x you want to calculate derivative: ");
- scanf("%f", &xp);
-
- /* Checking whether given point (xp) is
- a valid point in x data or not */
- for(i=0;i< n;i++)
- {
-     if (fabs(xp - x[i])< 0.0001)
-     {
-        /* index of calculation point */
-        index = i;
-        flag = 1;
-        break;
-     }
- }
-
- /* if flag is still 0 then given point (xp)
- is not a valid point (not in list of x data)
- for this calculation */
- if (flag==0)
- {
-     printf("Invalid calculation point. Program exiting...");
-     exit(0);
- }
-
- /* Generating Backward Difference Table */
- for(i = 1; i < n; i++)
- {
-  for(j = n-1; j > i-1; j--)
-  {
-   y[j][i] = y[j][i-1] - y[j-1][i-1];
-  }
- }
-
- h = x[1] - x[0];
-
-
- {
-     term = pow(y[index][i], i)/i;
-     sum = sum + term;
- }
-
- first_derivative = sum/h;
-
- printf("First derivative at x = %0.2f is %0.2f", xp, first_derivative);
-
- return 0;
-}
+	int n,i,j,ch=30;
+	float arr[10][11],px=1,x,y,p,h;
+	printf("\nEnter the no of data:");
+	scanf("%d",&n);
+	printf("\nEnter the data : \n");
+	for(i=0;i<n;i++){
+		printf("X%d=",i+1);
+		scanf("%f",&arr[i][0]);
+		printf("Y%d=",i+1);
+		scanf("%f",&arr[i][1]);
+	}
+//forming the difference table
+	for(j=2;j<=n;j++){
+	for(i=0;i<n-1;i++)
+	arr[i][j]=arr[i+1][j-1]-arr[i][j-1];
+	}
+//printing table
+	printf("\nThe difference table");
+	printf("\n \t X \t Y");
+	for(i=0;i<n-1;i++)
+	printf("\t%c^%d",ch,i+1);
+	for(i=0;i<n;i++){
+	printf("\n");
+	for(j=0;j<n+1-i;j++)
+	printf("\t%.4f",arr[i][j]);
+	}
+	printf("\n\nEnter the value of x for f(x): ");
+	scanf("%f",&x);
+	//calculate the value of f(x) for x
+	h=arr[n-1][0]-arr[n-2][0];
+	p=(x-arr[n-1][0])/h;
+	y=arr[n-1][1];
+	for(i=1;i<n;i++){
+	px=px*(p+(i-1));
+	y=y+(arr[n-1-i][i+1]*px)/fact(i);
+	}
+	printf("\nthe value of f(x) at x=%f is %f",x,y);
+	}
+	int fact(int n){ 
+	int f=1,i;
+	for(i=1;i<=n;i++)
+	f=f*i;
+	return f;
+	}
